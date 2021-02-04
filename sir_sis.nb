@@ -1,0 +1,167 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      7219,        159]
+NotebookOptionsPosition[      6172,        133]
+NotebookOutlinePosition[      6515,        148]
+CellTagsIndexPosition[      6472,        145]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["", "Author",
+ CellChangeTimes->{{3.821353590402722*^9, 
+  3.8213535904234314`*^9}},ExpressionUUID->"9c3640cd-1d3e-4f8d-8ef0-\
+693e3c6f5855"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Sprawozdanie z laboratori\[OAcute]w naukowych ,,Modele epidemiologiczne\
+\[CloseCurlyDoubleQuote]\
+\>", "Title",
+ CellChangeTimes->{{3.821353495631779*^9, 3.821353528208353*^9}, {
+  3.821353582989705*^9, 
+  3.8213535936015453`*^9}},ExpressionUUID->"43e73db1-af31-43ad-ace9-\
+ebd913599640"],
+
+Cell["Autorzy: Pawe\[LSlash] Polak, Jacek Strza\[LSlash]kowski", "Author",
+ CellChangeTimes->{{3.8213535681940737`*^9, 
+  3.8213535762946095`*^9}},ExpressionUUID->"6d9b2962-2a3b-45a7-ae86-\
+590bcbd1b6e3"],
+
+Cell[CellGroupData[{
+
+Cell["1. Teoria", "Chapter",
+ CellChangeTimes->{{3.8213537026099205`*^9, 3.821353704319796*^9}, {
+   3.8213537530972457`*^9, 3.821353759740552*^9}, 
+   3.82137720993501*^9},ExpressionUUID->"dba0b19d-a0ae-403c-809e-\
+85eb6bf6fbba"],
+
+Cell["\<\
+Istnieje wiele modeli opisuj\:0105cych mo\:017cliwy przebieg epidemii, r\
+\[OAcute]\:017cni\:0105ce si\:0119 pewnymi warunkami pocz\:0105tkowymi oraz \
+pewnymi charakterystycznymi za\[LSlash]o\:017ceniami dla ka\:017cdego z \
+modeli. W tej pracy skupimy si\:0119 na dw\[OAcute]ch podstawowych modelach \
+jakimi s\:0105 modele SIS oraz SIR. Poszczeg\[OAcute]lne litery w nazwach \
+modeli tworz\:0105 skr\[OAcute]t s\[LSlash]\[OAcute]w z j\:0119zyka \
+angielskiego i oznaczaj\:0105 kolejno : S-Susceptible, I-Infectious, \
+R-Recovered. Modele te opieraj\:0105 si\:0119 na obserwacji rozwoju epidemi w \
+\:015brodowisku jakiej\:015b grupy, gdzie rozw\[OAcute]j epidemii jest \
+definiowany za pomoc\:0105 statusu poszczeg\[OAcute]lnych cz\[LSlash]onk\
+\[OAcute]w grupy. Statusy pochodz\:0105 od podanych wcze\:015bniej skr\
+\[OAcute]t\[OAcute]w i znaczaj\:0105 one kolejno: S - dana osoba ma status \
+osoby nie zara\:017conej, ale potencjalnie podatnej na zara\:017cenie  I-dana \
+osoba ma status osoby zara\:017conej R- oznacza osob\:0119 kt\[OAcute]ra nie \
+jest zara\:017cona, kt\[OAcute]ra przesz\[LSlash]a przez chorob\:0119, przez \
+co albo nabra\[LSlash]a pernamentnej odporno\:015bci lub umar\[LSlash]a, wi\
+\:0119c nie bierze udzia\[LSlash]u ju\:017c czynnego udzia\[LSlash]u w \
+epidemi. Jak wida\[CAcute] w modelu SIS, nie wyst\:0119puje stan R, wi\:0119c \
+jest to model przedstawiaj\:0105cy epidemi\:0119, gdzie potencjalni \
+zara\:017ceni nie nabieraj\:0105 nigdy odporno\:015bci na chorob\:0119.
+
+W niniejszej pracy skupili\:015bmy si\:0119 na modelu synchronicznym i \
+asynchronicznym dla modeli SIS i SIR. Model synchroniczny opiera si\:0119 na \
+algorytmie, gdzie dana osoba mo\:017ce zarazi\[CAcute] si\:0119 od swojego s\
+\:0105siada dopiero w nast\:0119pnej ,,turze\[CloseCurlyDoubleQuote] \
+symulacji, za\:015b w modelu asynchronicznym dana osoba mo\:017ce zarazi\
+\[CAcute] si\:0119 w danej turze od osoby, kt\[OAcute]ra sama \
+zarazi\[LSlash]a si\:0119 w tej samej turze. Warunkiem koniecznym do rozpocz\
+\:0119cia symulacji jest wyst\:0119powanie cho\[CAcute] jednej osoby zara\
+\:017conej, kt\[OAcute]ra jest reprezentowana przez warto\:015b\[CAcute] \
+parametru \[Sigma]. Model SIR mo\:017cna opisa\[CAcute] za pomoc\:0105 r\
+\[OAcute]wna\:0144 r\[OAcute]\:017cniczkowych:
+\\frac{dS}{dt}=-\\frac{\\Beta IS}{N},
+\\frac{dI}{dt}=\\frac{\\Beta IS}{N}-\\gamma I,
+\\frac{dR}{dt}=\\gamma I,
+gdzie S, I, R to reprezentuje grupe os\[OAcute]b o statusach kolejno S, I \
+oraz R, za\:015b N jest to suma wszystkich tych os\[OAcute]b. \\Beta to wsp\
+\[OAcute]\[LSlash]czynnik prawdopodobie\:0144stwa przej\:015bcia ze stanu S \
+do stanu I, za\:015b \\gamma to wsp\[OAcute]\[LSlash]czynnik prawdopodobie\
+\:0144stwa przej\:015bcia ze stanu I do stanu R. W modelu SIS mamy do \
+czynienia z nieco zmodyfikowanym modelem, gdzie R=0 i \\gamma=0 (bo osoby nie \
+nabywaj\:0105 odporno\:015bci w tym modelu).  
+// Dzielimy na modele synchro i asynchro.Prawdopodobie\:0144stwa przej\:015b\
+\[CAcute] mi\:0119dzy statusami. R\[OAcute]wnania r\[OAcute]\:017cniczkowe z \
+wiki itd.\
+\>", "Text",
+ CellChangeTimes->{{3.8213538217975874`*^9, 3.8213539495986214`*^9}, {
+  3.8213540574191046`*^9, 3.821354130051055*^9}, {3.8213780743584857`*^9, 
+  3.821378237371725*^9}, {3.8213783510069838`*^9, 3.8213783551385937`*^9}, {
+  3.8213784987468953`*^9, 3.821378620339522*^9}, {3.8213787985827913`*^9, 
+  3.821378804178706*^9}, {3.8213788450448017`*^9, 3.821378884183922*^9}, {
+  3.8213806885819225`*^9, 
+  3.8213810058878574`*^9}},ExpressionUUID->"243afead-9483-4d5c-93d0-\
+d986660db4d0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["2. Wnioski", "Chapter",
+ CellChangeTimes->{{3.8213772036363144`*^9, 
+  3.8213772087938185`*^9}},ExpressionUUID->"66ea5798-ba62-4e61-b6b1-\
+478182ab15ca"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.8213537949801283`*^9, 
+  3.821353795939618*^9}},ExpressionUUID->"959725f4-da4e-4194-86f6-\
+bc8d390d5525"],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.8212150083710036`*^9, 3.8212150200974064`*^9}, {
+  3.8212151300543585`*^9, 3.8212153309811087`*^9}, {3.8212153702423725`*^9, 
+  3.8212154197188973`*^9}, {3.821215583998444*^9, 3.821215745197437*^9}, {
+  3.821215799348979*^9, 3.8212159973637033`*^9}, {3.82121603322044*^9, 
+  3.8212161546577497`*^9}, {3.8212162237093973`*^9, 3.82121641931278*^9}, {
+  3.821216526959277*^9, 3.821216532132104*^9}, {3.821216564930578*^9, 
+  3.8212166097877746`*^9}, {3.821217251960497*^9, 3.8212172795722914`*^9}, {
+  3.821377138990215*^9, 
+  3.821377145243719*^9}},ExpressionUUID->"0dee6398-d5b8-4db7-bc9a-\
+0ae3f8f677af"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1520, 781},
+WindowMargins->{{167, Automatic}, {Automatic, 6}},
+FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 8, 2019)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 146, 3, 31, "Author",ExpressionUUID->"9c3640cd-1d3e-4f8d-8ef0-693e3c6f5855"],
+Cell[CellGroupData[{
+Cell[729, 27, 299, 7, 96, "Title",ExpressionUUID->"43e73db1-af31-43ad-ace9-ebd913599640"],
+Cell[1031, 36, 204, 3, 31, "Author",ExpressionUUID->"6d9b2962-2a3b-45a7-ae86-590bcbd1b6e3"],
+Cell[CellGroupData[{
+Cell[1260, 43, 230, 4, 67, "Chapter",ExpressionUUID->"dba0b19d-a0ae-403c-809e-85eb6bf6fbba"],
+Cell[1493, 49, 3588, 54, 364, "Text",ExpressionUUID->"243afead-9483-4d5c-93d0-d986660db4d0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5118, 108, 159, 3, 67, "Chapter",ExpressionUUID->"66ea5798-ba62-4e61-b6b1-478182ab15ca"],
+Cell[5280, 113, 154, 3, 28, "Input",ExpressionUUID->"959725f4-da4e-4194-86f6-bc8d390d5525"],
+Cell[5437, 118, 707, 11, 67, "Input",ExpressionUUID->"0dee6398-d5b8-4db7-bc9a-0ae3f8f677af"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
